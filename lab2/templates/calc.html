@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+    <h1 class="my-5">Задание к лабораторной работе №2</h1>
+
+    <form method="GET" class="form-inline">
+        <input type="text" name="operand1" class="form-control mr-2" value="{{ request.args.get('operand1', '') }}">
+        <select  class="form-control mr-2" name="operation" id="operation">
+            {% for operation in operations %}
+                <option {% if request.args.get('operation') == operation %}selected{% endif %}>{{ operation }}</option>
+            {% endfor %}
+        </select>
+        <input type="text" name="operand2" class="form-control mr-2" value="{{ request.args.get('operand2', '') }}">
+        <button type="submit"class="btn btn-dark mr-2">=</button>
+
+        {% if result %}
+            <input type="text" name="result" class="form-control mr-2" value="{{ result }}" disabled>
+        {% endif %}
+    </form>
+
+    {% if error_msg %}
+        <div class="alert alert-danger" role="alert">
+            {{ error_msg }}
+        </div>
+    {% endif %}    
+
+{% endblock %}

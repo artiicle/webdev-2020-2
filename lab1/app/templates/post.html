@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+
+  <h1>{{ post['title'] }}</h1>
+  <p class="my-3">
+    {{ post.author }}<br>
+    {{ post.date }}
+  </p>
+  <img class=" img-fluid" src="{{ url_for('static', filename='images/' ~ post.image_filename) }}">
+  <p class="text-justify my-5">
+    {{ post.text }}
+  </p>
+
+  <form>
+    {% for comment in post.comments %}
+</div>
+<div class="container mt-3">
+  <div class="media ">
+    <img width="50" class="mr-3" src="{{ url_for('static', filename='images/' ~ 'avatar.jpg') }}">
+    <div class="media-body">
+      <h5 class="mt-0">
+        {{ comment.author }}
+      </h5>
+      {{ comment.text }}
+      {% for reply in comment.replies %}
+      <div class="media mt-3">
+        <a class="pr-3" href="#">
+          <img width="50" src="{{ url_for('static', filename='images/' ~ 'avatar.jpg') }}">
+        </a>
+        <div class="media-body">
+          <h5 class="mt-0">{{ reply.author }}</h5>
+          {{ reply.text}}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
